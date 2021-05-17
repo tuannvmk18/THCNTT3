@@ -65,7 +65,7 @@ async def get_cookie_or_token(
 @app.websocket("/client/{client_id}/ws")
 async def websocket_endpoint(
     websocket: WebSocket,
-    chatrom_id: str,
+    client_id: str,
     cookie_or_token: str = Depends(get_cookie_or_token),
 ):
     await manager.connect(websocket)
