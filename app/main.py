@@ -41,9 +41,9 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 
-@app.get("/get-messages/{chatrom_id}")
-def get_messages(chatrom_id):
-    payload = message_cl.find({"chatrom_id": chatrom_id})
+@app.get("/get-messages")
+def get_messages():
+    payload = message_cl.find({})
     return dumps(payload)
 
 
@@ -62,7 +62,7 @@ async def get_cookie_or_token(
     return session or token
 
 
-@app.websocket("/chatrom/{chatrom_id}/ws")
+@app.websocket("/client/{client_id}/ws")
 async def websocket_endpoint(
     websocket: WebSocket,
     chatrom_id: str,
@@ -75,11 +75,9 @@ async def websocket_endpoint(
             message_cl.save({
                 u'token': cookie_or_token,
                 u'message': data,
-                u'chatrom_id': chatrom_id
             })
             await manager.broadcast({
                 u'token': cookie_or_token,
-                u'chatrom_id': chatrom_id,
                 u'message': data
             })
     except WebSocketDisconnect:
