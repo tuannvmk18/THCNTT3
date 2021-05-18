@@ -12,7 +12,8 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary hididen_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;">
+    <button type="button" class="btn btn-primary hididen_btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        style="display: none;">
         Connect
     </button>
 
@@ -25,7 +26,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label>Token: <input type="text" id="token" autocomplete="off" value="some-key-token" /></label>
+                    <label>Token: <input type="text" id="token" autocomplete="off" value="No-name" /></label>
 
                 </div>
                 <div class="modal-footer">
@@ -45,14 +46,15 @@
     </ul>
     <script>
         var ws = null;
-        window.onload = function() {
+        window.onload = function () {
             btn = document.getElementsByClassName('hididen_btn')[0]
             btn.click()
         }
+
         function connect(event) {
             var client_id = Date.now()
             var token = document.getElementById("token")
-            ws = new WebSocket("wss://" + location.host + "/client/" + client_id.value + "/ws?token=" + token.value);
+            ws = new WebSocket("wss://" + location.host + "/client/" + client_id + "/ws?token=" + token.value);
             ws.onmessage = function (event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
