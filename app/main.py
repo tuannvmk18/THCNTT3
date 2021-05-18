@@ -81,4 +81,5 @@ async def websocket_endpoint(
                 u'message': data
             })
     except WebSocketDisconnect:
-        pass
+        manager.disconnect(websocket)
+        print(client_id + "left")
