@@ -13,7 +13,7 @@
     </script>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary hididen_btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;">
-        Launch demo modal
+        Connect
     </button>
 
     <!-- Modal -->
@@ -25,7 +25,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label>CLient ID: <input type="text" id="client_id" autocomplete="off" value="foo" /></label>
                     <label>Token: <input type="text" id="token" autocomplete="off" value="some-key-token" /></label>
 
                 </div>
@@ -51,7 +50,7 @@
             btn.click()
         }
         function connect(event) {
-            var client_id = document.getElementById("client_id")
+            var client_id = Date.now()
             var token = document.getElementById("token")
             ws = new WebSocket("wss://" + location.host + "/client/" + client_id.value + "/ws?token=" + token.value);
             ws.onmessage = function (event) {
