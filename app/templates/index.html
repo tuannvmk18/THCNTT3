@@ -53,7 +53,7 @@
         function connect(event) {
             var client_id = document.getElementById("client_id")
             var token = document.getElementById("token")
-            ws = new WebSocket("ws://127.0.0.1/client/" + client_id.value + "/ws?token=" + token.value);
+            ws = new WebSocket("wss://127.0.0.1/client/" + client_id.value + "/ws?token=" + token.value);
             ws.onmessage = function (event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
