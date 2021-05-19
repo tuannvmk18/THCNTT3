@@ -49,12 +49,26 @@
         window.onload = function () {
             btn = document.getElementsByClassName('hididen_btn')[0]
             btn.click()
+
+            fetch("http://" + location.host + "/get-messages")
+                .then(response => response.json())
+                .then(t => {
+                    list = JSON.parse(t)
+                    console.log(list)
+                    list.forEach(data => {
+                        var messages = document.getElementById('messages')
+                        var message = document.createElement('li')
+                        var content = document.createTextNode(data.token + ":" + data.message)
+                        message.appendChild(content)
+                        messages.appendChild(message)
+                    })
+                });
         }
 
         function connect(event) {
             var client_id = Date.now()
             var token = document.getElementById("token")
-            ws = new WebSocket("wss://" + location.host + "/client/" + client_id + "/ws?token=" + token.value);
+            ws = new WebSocket("ws://" + location.host + "/client/" + client_id + "/ws?token=" + token.value);
             ws.onmessage = function (event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
