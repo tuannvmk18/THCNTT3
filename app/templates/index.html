@@ -50,7 +50,7 @@
             btn = document.getElementsByClassName('hididen_btn')[0]
             btn.click()
 
-            fetch("http://" + location.host + "/get-messages")
+            fetch("https://" + location.host + "/get-messages")
                 .then(response => response.json())
                 .then(t => {
                     list = JSON.parse(t)
@@ -68,7 +68,7 @@
         function connect(event) {
             var client_id = Date.now()
             var token = document.getElementById("token")
-            ws = new WebSocket("ws://" + location.host + "/client/" + client_id + "/ws?token=" + token.value);
+            ws = new WebSocket("wss://" + location.host + "/client/" + client_id + "/ws?token=" + token.value);
             ws.onmessage = function (event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
